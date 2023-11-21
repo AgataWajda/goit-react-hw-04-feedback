@@ -32,7 +32,17 @@ class MyClassComponent extends Component {
     this.setState({ bad: this.state.bad + 1 });
   };
 
+  countTotalFeedback = () => {
+    return this.state.good + this.state.bad + this.state.neutral;
+  };
+
+  countPositiveFeedbackPercentage = total => {
+    return (this.state.good / total) * 100;
+  };
+
   render() {
+    const total = this.countTotalFeedback();
+    const percentage = this.countPositiveFeedbackPercentage(total);
     return (
       <div>
         <button onClick={this.goodCounter}>Good</button>
@@ -40,8 +50,9 @@ class MyClassComponent extends Component {
         <button onClick={this.badCounter}>Bad</button>
         <p>Good: {this.state.good}</p>
         <p>Neutral: {this.state.neutral}</p>
-
         <p>Bad: {this.state.bad}</p>
+        <p>Total: {total}</p>
+        <p>Positive feedback: {Math.round(percentage)} %</p>
       </div>
     );
   }
