@@ -1,7 +1,8 @@
 import { Component } from 'react';
-import { Statistic } from './Statistics';
-import { Freedback } from './Feedback';
-import { Section } from './Section';
+import { Statistic } from './Statistic/Statistics';
+import { Freedback } from './Feedback/Feedback';
+import { Section } from './Section/Section';
+import { Notfication } from './Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -41,13 +42,17 @@ export class App extends Component {
             badCounter={this.badCounter}
             neutralCounter={this.neutralCounter}
           ></Freedback>
-          <Statistic
-            bad={this.state.bad}
-            good={this.state.good}
-            neutral={this.state.neutral}
-            total={total}
-            percentage={percentage}
-          ></Statistic>
+          {total > 0 ? (
+            <Statistic
+              bad={this.state.bad}
+              good={this.state.good}
+              neutral={this.state.neutral}
+              total={total}
+              percentage={percentage}
+            ></Statistic>
+          ) : (
+            <Notfication message="No feedback given"></Notfication>
+          )}
         </Section>
       </div>
     );
