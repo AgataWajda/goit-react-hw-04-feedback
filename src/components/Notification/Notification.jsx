@@ -1,4 +1,6 @@
 import css from './Notification.module.css';
+import propTypes from 'prop-types';
+
 export const Notfication = ({ message }) => {
   return (
     <div>
@@ -6,4 +8,8 @@ export const Notfication = ({ message }) => {
       <span className={css.noFeedback}>{message}</span>
     </div>
   );
+};
+
+Notification.propTypes = {
+  message: propTypes.string,
 };

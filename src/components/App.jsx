@@ -1,26 +1,20 @@
 import { Component } from 'react';
 import { Statistic } from './Statistic/Statistics';
-import { Freedback } from './Feedback/Feedback';
+import { Feedback } from './Feedback/Feedback';
 import { Section } from './Section/Section';
 import { Notfication } from './Notification/Notification';
 
 export class App extends Component {
   state = {
     good: 0,
-    bad: 0,
     neutral: 0,
+    bad: 0,
   };
 
-  goodCounter = () => {
-    this.setState({ good: this.state.good + 1 });
-  };
+  handleLeaveFeedback = event => {
+    const { name } = event.target;
 
-  neutralCounter = () => {
-    this.setState({ neutral: this.state.neutral + 1 });
-  };
-
-  badCounter = () => {
-    this.setState({ bad: this.state.bad + 1 });
+    this.setState({ [name]: this.state[name] + 1 });
   };
 
   countTotalFeedback = () => {
@@ -37,11 +31,10 @@ export class App extends Component {
     return (
       <div>
         <Section title="Please leave your feedback">
-          <Freedback
-            goodCounter={this.goodCounter}
-            badCounter={this.badCounter}
-            neutralCounter={this.neutralCounter}
-          ></Freedback>
+          <Feedback
+            options={this.state}
+            onLeaveFeedback={this.handleLeaveFeedback}
+          ></Feedback>
           {total > 0 ? (
             <Statistic
               bad={this.state.bad}

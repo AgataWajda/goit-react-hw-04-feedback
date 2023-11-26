@@ -1,16 +1,27 @@
 import css from './Feedback.module.css';
-export const Freedback = ({ goodCounter, neutralCounter, badCounter }) => {
+import PropTypes from 'prop-types';
+
+export const Feedback = ({ options, onLeaveFeedback }) => {
   return (
     <div className={css.buttons}>
-      <button onClick={goodCounter} className={css.button}>
-        Good
-      </button>
-      <button onClick={neutralCounter} className={css.button}>
-        Neutral
-      </button>
-      <button onClick={badCounter} className={css.button}>
-        Bad
-      </button>
+      {Object.keys(options).map(option => {
+        return (
+          <button
+            className={css.button}
+            name={option}
+            type="button"
+            key={option}
+            onClick={onLeaveFeedback}
+          >
+            {option}
+          </button>
+        );
+      })}
     </div>
   );
+};
+
+Feedback.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired),
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
