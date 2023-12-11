@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const Feedback = ({ options, onLeaveFeedback }) => {
   return (
     <div className={css.buttons}>
-      {Object.keys(options).map(option => {
+      {options.map(option => {
         return (
           <button
             className={css.button}
